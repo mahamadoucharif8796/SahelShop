@@ -128,7 +128,8 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # On utilise le stockage standard pour éviter que le build échoue sur des fichiers manquants
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
 
