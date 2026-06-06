@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    # Cloudinary - Doit être placé juste AVANT staticfiles
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -122,17 +126,29 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Indique à Whitenoise de gérer et compresser les fichiers de manière efficace
+# Configuration de WhiteNoise pour le style et les assets
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        # On utilise le stockage standard pour éviter que le build échoue sur des fichiers manquants
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        # On réactive le stockage compressé avec manifeste pour les icônes Jazzmin
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 WHITENOISE_MANIFEST_STRICT = False
 
+
+# Fichiers Médias (Uploads d'images sur Cloudinary)
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dcgrnykv',
+    'API_KEY': '528973239615947',
+    'API_SECRET': 'XNd_PdJglLYj-LJiN_vYnoMzEYA',
+}
+
+# On définit Cloudinary comme stockage par défaut pour les images
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
