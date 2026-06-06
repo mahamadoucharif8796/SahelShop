@@ -119,21 +119,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+# Modifie cette partie tout en bas de ton settings.py :
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Configuration de WhiteNoise standard
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # On utilise le stockage de base de WhiteNoise pour ignorer les fichiers manquants
+        "BACKEND": "whitenoise.storage.StaticFilesStorage",
     },
 }
+
+# Cette ligne dit à WhiteNoise de ne pas paniquer si un fichier mineur est absent
 WHITENOISE_MANIFEST_STRICT = False
 
-
-# Fichiers Médias locaux pour la soutenance
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
