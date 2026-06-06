@@ -9,5 +9,4 @@ urlpatterns = [
 ]
 
 # Cette ligne permet à Django de servir les images de tes produits en développement
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
