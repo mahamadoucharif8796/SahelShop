@@ -149,4 +149,4 @@ CLOUDINARY_STORAGE = {
 }
 
 # On définit Cloudinary comme stockage par défaut pour les images
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage',
